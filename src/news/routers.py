@@ -61,8 +61,8 @@ async def create_category(category: CategoryCreateSchema) -> Category:
         return new_category
 
 
-@category_router.delete("/{category_id}", response_model=CategoryReadSchema)
-async def delete_category(category_id: int) -> Category:
+@category_router.delete("/{category_id}")
+async def delete_category(category_id: int):
     """
     Delete category by id
     """
@@ -74,7 +74,7 @@ async def delete_category(category_id: int) -> Category:
             raise HTTPException(status_code=404, detail="Category not found")
         await session.delete(category)
         await session.commit()
-        return category
+        # return category
 
 
 @category_router.put("/{category_id}", response_model=CategoryReadSchema)
