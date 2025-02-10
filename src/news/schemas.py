@@ -5,7 +5,7 @@ Pydantic schemas for news app
 from datetime import datetime
 
 from pydantic import BaseModel
-from typing import Optional, List
+from typing import List
 
 
 class CategoryReadSchema(BaseModel):
@@ -33,11 +33,11 @@ class NewsReadSchema(BaseModel):
     """
     id: int
     title: str
-    content: Optional[str] = None
-    images: Optional[List[str]] = None
+    content: str | None = None
+    images: List[str] | None = None
     created: datetime
     updated: datetime
-    category_id: Optional[int] = None
+    category_id: int | None = None
 
     class Config:
         orm_mode = True
@@ -48,6 +48,6 @@ class NewsCreateSchema(BaseModel):
     News create schema
     """
     title: str
-    content: Optional[str] = None
-    images: Optional[List[str]] = None
-    category_id: Optional[int] = None
+    content: str | None = None
+    images: List[str] | None = None
+    category_id: int | None = None
