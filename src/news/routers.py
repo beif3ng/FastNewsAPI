@@ -74,7 +74,6 @@ async def delete_category(category_id: int):
             raise HTTPException(status_code=404, detail="Category not found")
         await session.delete(category)
         await session.commit()
-        # return category
 
 
 @category_router.put("/{category_id}", response_model=CategoryReadSchema)
@@ -157,8 +156,8 @@ async def create_news(news: NewsCreateSchema) -> News:
         return new_news
 
 
-@news_router.delete("/{news_id}", response_model=NewsReadSchema)
-async def delete_news(news_id: int) -> News:
+@news_router.delete("/{news_id}")
+async def delete_news(news_id: int):
     """
     Delete news by id
     """
@@ -170,7 +169,7 @@ async def delete_news(news_id: int) -> News:
             raise HTTPException(status_code=404, detail="News not found")
         await session.delete(news)
         await session.commit()
-        return news
+
 
 
 @news_router.put("/{news_id}", response_model=NewsReadSchema)
