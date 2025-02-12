@@ -17,7 +17,7 @@ class CategoryReadSchema(BaseModel):
     created: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class CategoryCreateSchema(BaseModel):
@@ -40,7 +40,7 @@ class NewsReadSchema(BaseModel):
     category_id: int | None = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class NewsCreateSchema(BaseModel):
