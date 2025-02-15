@@ -8,25 +8,6 @@ from pydantic import BaseModel
 from typing import List
 
 
-class CategoryReadSchema(BaseModel):
-    """
-    Category read schema
-    """
-    id: int
-    name: str
-    created: datetime
-
-    class Config:
-        from_attributes = True
-
-
-class CategoryCreateSchema(BaseModel):
-    """
-    Category create schema
-    """
-    name: str
-
-
 class NewsReadSchema(BaseModel):
     """
     News read schema
