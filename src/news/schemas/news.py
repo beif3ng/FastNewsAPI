@@ -1,11 +1,12 @@
 """
-Pydantic schemas for news app
+Pydantic schemas for News
 """
 
 from datetime import datetime
 
 from pydantic import BaseModel
-from typing import List
+
+from .categories import CategoryReadSchema
 
 
 class NewsReadSchema(BaseModel):
@@ -15,20 +16,17 @@ class NewsReadSchema(BaseModel):
     id: int
     title: str
     content: str | None = None
-    images: List[str] | None = None
+    images: list[str | None]
     created: datetime
     updated: datetime
     category_id: int | None = None
-
+    
     class Config:
         from_attributes = True
 
 
-class NewsCreateSchema(BaseModel):
+class NewsReadDetailsSchema(NewsReadSchema):
     """
-    News create schema
+    News read schema with detailed category data
     """
-    title: str
-    content: str | None = None
-    images: List[str] | None = None
-    category_id: int | None = None
+    category: CategoryReadSchema | None = None

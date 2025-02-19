@@ -1,5 +1,5 @@
 """
-Pydantic schemas for category app
+Pydantic schemas for Categories
 """
 
 from datetime import datetime

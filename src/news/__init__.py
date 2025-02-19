@@ -2,8 +2,8 @@
 __init__.py
 """
 
-from .routers import news_router
+from . import routers
 
 __all__ = [
-    "news_router",
+    "routers",
 ]

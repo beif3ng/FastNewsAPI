@@ -8,7 +8,6 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 from alembic import context
 
 from src.database import Base, DATABASE_URL
-from src.category.models import *
 from src.news.models import *
 from src.users.models import *
 
