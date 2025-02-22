@@ -17,7 +17,7 @@ from .categories import CategoryService
 from src.manager import DBManager
 
 
-class NewsService():
+class NewsService:
 
     @classmethod
     async def get_news(

@@ -13,7 +13,7 @@ from ..models import Category
 from src.manager import DBManager
 
 
-class CategoryService():
+class CategoryService:
 
     @classmethod
     async def get_categories(
