@@ -135,7 +135,7 @@ class DBManager():
             return None
 
         for field, value in kwargs.items():
-            if field in model.__table__.columns and value:
+            if field in model.__table__.columns:
                 setattr(instance, field, value)
 
         if commit:

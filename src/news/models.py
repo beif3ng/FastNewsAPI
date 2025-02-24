@@ -3,11 +3,12 @@ SQLAlchemy ORM models
 """
 
 from datetime import datetime
-
+from uuid import UUID
 from sqlalchemy import ForeignKey, String, ARRAY
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from src.database import Base
+from src.users.models import User
 
 
 class Category(Base):
@@ -58,7 +59,11 @@ class Comment(Base):
     news_id: Mapped[int] = mapped_column(
         ForeignKey("news.id", ondelete="CASCADE"), nullable=False
     )
+    user_id: Mapped[UUID] = mapped_column(
+        ForeignKey("user.id", ondelete="CASCADE"), nullable=False
+    )
 
     news: Mapped[News] = relationship("News", back_populates="comments")
+    user: Mapped["User"] = relationship("User", back_populates="comments")
 
 # sudo docker run --name fast_db -e POSTGRES_PASSWORD=123456 -p 5432:5432 -d postgres

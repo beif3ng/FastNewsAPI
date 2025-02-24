@@ -25,7 +25,13 @@ class CommentCreateSchema(BaseModel):
     """
     Comment create schema
     """
-    news_id: int
     text: str
+    news_id: int
 
 
+class CommentUpdateSchema(BaseModel):
+    """
+    Comment update schema
+    """
+    news_id: int | None = None
+    text: str | None = None

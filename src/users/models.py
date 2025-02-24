@@ -11,7 +11,7 @@ from fastapi_users_db_sqlalchemy.access_token import (
     SQLAlchemyBaseAccessTokenTableUUID
 )
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from src.database import async_session as async_session, Base
 
@@ -21,12 +21,13 @@ class User(SQLAlchemyBaseUserTableUUID, Base):
     User model
     """
 
-    __tablename__ = "users"
+    __tablename__ = "user"
 
     full_name: Mapped[str] = mapped_column(nullable=False)
+    comments: Mapped[list["Comment"]] = relationship("Comment", back_populates="user")
 
 
-class AccessToken(SQLAlchemyBaseUserTableUUID, Base):
+class AccessToken(SQLAlchemyBaseAccessTokenTableUUID, Base):
     pass
 
 
