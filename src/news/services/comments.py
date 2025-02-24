@@ -55,7 +55,7 @@ class CommentService:
         Service
         """
 
-        await CategoryService.get_category(db, category_id=comment["category_id"])
+        await DBManager.create_object(**comment, db=db, model=Comment, commit=True)
 
 
     @classmethod
@@ -74,48 +74,22 @@ class CommentService:
             cls,
             db: AsyncSession,
             comment_id: int,
-            comment_data: dict,
+            comment: dict,
+            partial: bool = False,
     ) -> Comment:
         """
         Service
         """
-        comment = await DBManager.update_object(
-            db=db,
-            model=Comment,
-            field="id",
-            value=comment_id,
-            **comment_data,
-            commit=True
-        )
+        if partial:
+            comment = await DBManager.partial_update_object(**comment,db=db, model=Comment, field="id",
+                                                            value=comment_id, commit=True)
+        else:
+            comment = await DBManager.update_object(**comment, db=db, model=Comment, field="id",
+                                                     value=comment_id, commit=True)
+
         if comment is None:
             raise HTTPException(status_code=404, detail="Comment not found")
         return comment
-
-    @classmethod
-    async def partial_update_comment(
-            cls,
-            db: AsyncSession,
-            comment_id: int,
-            comment_data: dict,
-    ) -> Comment:
-        """
-        Service
-        """
-        comment = await DBManager.partial_update_object(
-            db=db,
-            model=Comment,
-            field="id",
-            value=comment_id,
-            **comment_data,
-            commit=True
-        )
-        if comment is None:
-            raise HTTPException(status_code=404, detail="Comment not found")
-        return comment
-
-
-
-
 
 
 

@@ -6,8 +6,6 @@ from datetime import datetime
 
 from pydantic import BaseModel
 
-from .news import NewsReadSchema
-
 
 class CommentReadSchema(BaseModel):
     """
@@ -23,8 +21,11 @@ class CommentReadSchema(BaseModel):
         from_attributes = True
 
 
-class CommentReadDetailsSchema(BaseModel):
+class CommentCreateSchema(BaseModel):
     """
-    Comment read details schema with detailed news data
+    Comment create schema
     """
-    comment: NewsReadSchema
+    news_id: int
+    text: str
+
+

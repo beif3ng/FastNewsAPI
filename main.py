@@ -11,4 +11,5 @@ app = FastAPI()
 
 app.include_router(router=routers.categories_router)
 app.include_router(router=routers.news_router)
+app.include_router(router=routers.comments_router)
 app.include_router(router=users_router)
