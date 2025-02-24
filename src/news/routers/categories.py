@@ -2,7 +2,6 @@
 Categories Router
 """
 
-
 from typing import Sequence
 
 from fastapi import APIRouter, Depends
@@ -44,26 +43,27 @@ async def create_category(category: CategoryCreateSchema, db: AsyncSession = Dep
     return await CategoryService.create_category(db, category.dict())
 
 
-@router.delete("/{category_id}", status_code=204)
-async def delete_category(category_id: int, db: AsyncSession = Depends(get_db)) -> None:
-    """
-    Delete category by id
-    """
-    return await CategoryService.delete_category(db, category_id)
-
-
 @router.put("/{category_id}", response_model=CategoryReadSchema)
-async def update_category(category_id: int, category: CategoryCreateSchema, db: AsyncSession = Depends(get_db)) -> Category:
+async def update_category(category_id: int, category: CategoryCreateSchema,
+                          db: AsyncSession = Depends(get_db)) -> Category:
     """
     Update category by id
     """
     return await CategoryService.update_category(db, category_id, category.dict())
 
 
-
 @router.patch("/{category_id}", response_model=CategoryReadSchema)
-async def partial_update_category(category_id: int, category: CategoryCreateSchema, db: AsyncSession = Depends(get_db)) -> Category:
+async def partial_update_category(category_id: int, category: CategoryCreateSchema,
+                                  db: AsyncSession = Depends(get_db)) -> Category:
     """
-    Update category by id
+    Partial update category by id
     """
     return await CategoryService.update_category(db, category_id, category.dict(), partial=True)
+
+
+@router.delete("/{category_id}", status_code=204)
+async def delete_category(category_id: int, db: AsyncSession = Depends(get_db)) -> None:
+    """
+    Delete category by id
+    """
+    return await CategoryService.delete_category(db, category_id)

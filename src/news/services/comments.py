@@ -55,7 +55,7 @@ class CommentService:
         Service
         """
 
-        await DBManager.create_object(**comment, db=db, model=Comment, commit=True)
+        return await DBManager.create_object(**comment, db=db, model=Comment, commit=True)
 
 
     @classmethod

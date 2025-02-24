@@ -1,5 +1,5 @@
 """
-FastAOI users
+FastAPI users
 """
 
 from typing import AsyncGenerator

@@ -30,7 +30,7 @@ async def get_news(offset: int = 0, limit: int = 10, db: AsyncSession = Depends(
 @router.get("/{news_id}", response_model=NewsReadDetailsSchema)
 async def get_news_object(news_id: int, db: AsyncSession = Depends(get_db)) -> News:
     """
-    Get news by id
+    Get news object by id
     """
     return await NewsService.get_news_object(db=db, news_id=news_id)
 
@@ -43,7 +43,9 @@ async def create_news_object(
         content: Annotated[str | None, Form()] = None,
         db: AsyncSession = Depends(get_db),
 ) -> News:
-    "Creates a news object"
+    """
+    Create news object
+    """
     return await NewsService.create_news(
         db=db,
         news={
@@ -65,7 +67,7 @@ async def update_news(
         db: AsyncSession = Depends(get_db),
 ) -> News:
     """
-    Updates a news object by id
+    Update news object by id
     """
     return await NewsService.update_news(
         db=db,
@@ -89,7 +91,7 @@ async def partial_update_news(
         db: AsyncSession = Depends(get_db),
 ) -> News:
     """
-    Partially updates a news object by id
+    Partial update news object by id
     """
     return await NewsService.partial_update_news(
         db=db,
@@ -106,6 +108,6 @@ async def partial_update_news(
 @router.delete("/{news_id}", status_code=204)
 async def delete_news_object(news_id: int, db: AsyncSession = Depends(get_db)) -> None:
     """
-    Deletes a news object by id
+    Delete news object by id
     """
     return await NewsService.delete_news(db=db, news_id=news_id)

@@ -45,12 +45,6 @@ async def create_comment(comment: CommentCreateSchema, db: AsyncSession = Depend
     return await CommentService.create_comment(db, comment.dict())
 
 
-@router.delete("/{comment_id}", status_code=204)
-async def delete_comment(comment_id: int, db: AsyncSession = Depends(get_db)) -> None:
-    """
-    Delete comment by id
-    """
-    return await CommentService.delete_comment(db, comment_id)
 
 
 @router.put("/{comment_id}", response_model=CommentReadSchema)
@@ -64,7 +58,7 @@ async def update_comment(comment_id: int, comment: CommentCreateSchema, db: Asyn
 @router.patch("/{comment_id}", response_model=CommentReadSchema)
 async def partial_update_comment(comment_id: int, comment: CommentCreateSchema, db: AsyncSession = Depends(get_db)) -> Comment:
     """
-    Update comment by id
+    Partial update comment by id
     """
     return await CommentService.update_comment(db, comment_id, comment.dict(), partial=True)
 
@@ -73,6 +67,12 @@ async def partial_update_comment(comment_id: int, comment: CommentCreateSchema, 
 
 
 
+@router.delete("/{comment_id}", status_code=204)
+async def delete_comment(comment_id: int, db: AsyncSession = Depends(get_db)) -> None:
+    """
+    Delete comment by id
+    """
+    return await CommentService.delete_comment(db, comment_id)
 
 
 
