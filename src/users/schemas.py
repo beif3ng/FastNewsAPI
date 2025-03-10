@@ -1,6 +1,7 @@
 import uuid
 
 from fastapi_users import schemas
+from pydantic import BaseModel, EmailStr
 
 
 class UserRead(schemas.BaseUser[uuid.UUID]):
@@ -13,3 +14,13 @@ class UserCreate(schemas.BaseUserCreate):
 
 class UserUpdate(schemas.BaseUserUpdate):
     full_name: str | None = None
+
+
+class VerificationRequestSchema(BaseModel):
+
+    email: EmailStr
+
+class VerificationSchema(BaseModel):
+
+    email: EmailStr
+    code: str

@@ -41,7 +41,7 @@ class NewsService:
         """
         Service
         """
-        news = await DBManager.get_object(db=db, model=News, field="id", value=news_id, option=joinedload([News.category, News.comment]))
+        news = await DBManager.get_object(db=db, model=News, field="id", value=news_id, option=joinedload([News.category, News.comments]))
         if news is None:
             raise HTTPException(status_code=404, detail="News not found")
         return news

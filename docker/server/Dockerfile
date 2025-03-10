@@ -11,4 +11,5 @@ RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 COPY . /app
 
 RUN chmod +x /app/docker/server/server-entrypoint.sh
+RUN chmod +x /app/docker/server/worker.sh
 
